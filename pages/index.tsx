@@ -305,6 +305,15 @@ export default function Home() {
             
             {/* Cards grid */}
             <div className="flex-1">
+              {/* Page indicator (moved above grid so it's always visible on first page) */}
+              {projectsTotalPages > 1 && (
+                <div className="text-center mb-3">
+                  <span className="text-xs sm:text-sm text-slate-600">
+                    Page {projectsPage} of {projectsTotalPages}
+                  </span>
+                </div>
+              )}
+
               <div className="grid gap-6 grid-cols-1 sm:grid-cols-2">
                 {currentProjects.map((project, index) => (
                 <article
@@ -356,14 +365,6 @@ export default function Home() {
               ))}
             </div>
             
-            {/* Page indicator */}
-            {projectsTotalPages > 1 && (
-              <div className="text-center mt-4">
-                <span className="text-sm text-slate-600">
-                  Page {projectsPage} of {projectsTotalPages}
-                </span>
-              </div>
-            )}
           </div>
             
             {/* Right arrow */}
