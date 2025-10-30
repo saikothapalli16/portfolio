@@ -4,6 +4,8 @@ import Head from "next/head";
 import { useEffect, useState } from "react";
 import { Experience, EXPERIENCES } from "../data/experiences";
 import { Project, PROJECTS } from "../data/projects";
+import HeroImage from "../components/HeroImage";
+
 
 type SectionId = "about" | "experience" | "work" | "contact";
 const SECTIONS: { id: SectionId; label: string }[] = [
@@ -69,8 +71,8 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Sai Kothapalli — UNC Themed</title>
-        <meta name="description" content="UNC-themed portfolio" />
+        <title>Sai Kothapalli Portfolio</title>
+        <meta name="description" content="Portfolio" />
       </Head>
 
       <main>
@@ -114,7 +116,7 @@ export default function Home() {
             className="pointer-events-none absolute inset-0"
             style={{
               background:
-                "linear-gradient(180deg, var(--unc-carolina) 0%, #eaf3fa 45%, var(--unc-offwhite) 100%)",
+                "linear-gradient(180deg, var(--unc-carolina) 0%, #eaf3fa 70%, var(--unc-offwhite) 100%)",
             }}
           />
           <div className="relative mx-auto grid max-w-6xl grid-cols-1 items-center gap-10 px-4 py-16 md:grid-cols-2">
@@ -141,94 +143,176 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="rounded-2xl border border-unc-slate/70 bg-white p-6 shadow-sm">
-              <div className="space-y-3">
-                <div className="h-3 w-1/3 rounded bg-unc-carolina" />
-                <div className="h-3 w-2/3 rounded bg-slate-200" />
-                <div className="h-3 w-1/2 rounded bg-slate-200" />
-                <div className="h-48 rounded-xl bg-slate-100" />
-              </div>
-              <p className="mt-4 text-sm text-slate-600">Swap with a headshot or illustration.</p>
-            </div>
+                    <div className="mt-16 w-full max-w-xl flex-shrink-0 lg:mt-0">
+          {/* card shell you had */}
+          <div className="rounded-2xl bg-white p-6 shadow-xl ring-1 ring-slate-900/10">
+            {/* header bars etc. can go above if you still want them */}
+            <HeroImage />
+
+            <p className="mt-4 text-sm text-slate-600 text-center">
+              The Old Well, UNC-Chapel Hill
+            </p>
+          </div>
+        </div>
+
           </div>
         </section>
 
         {/* Sections */}
         <Section id="about" title="About">
-          <p>
-            I’m a UNC-Chapel Hill student building full-stack apps (Spring Boot, React/Next.js,
-            PostgreSQL, AWS). I like clean architectures, thoughtful UI, and data-driven features.
-          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+            {/* Image on the left with 3D effect */}
+            <div 
+              className="rounded-2xl overflow-hidden bg-slate-100 border border-slate-200 shadow-sm"
+              style={{ perspective: "800px" }}
+            >
+              <div style={{ transformStyle: "preserve-3d" }}>
+                <img 
+                  src="/about-image.jpg" 
+                  alt="About me"
+                  className="w-full h-[500px] object-cover transition-transform duration-300 hover:scale-105"
+                  style={{
+                    transformOrigin: "center center"
+                  }}
+                />
+              </div>
+            </div>
+            
+            {/* Text on the right */}
+            <div>
+              <p className="text-lg leading-relaxed text-slate-700">
+                I’m Sai Kothapalli, a Computer Science and Economics student at UNC–Chapel Hill with a passion for building technology that connects people, tells stories, and drives real-world impact. Whether I’m developing full-stack applications that streamline how communities share ideas, experimenting with machine learning projects that uncover patterns in data, or helping design interactive puzzles for Chapel Thrill Escapes, I love turning complex systems into intuitive experiences. Outside of coding, I work at the BeAM Makerspace, where I help others bring creative projects to life, and I lead cultural initiatives through Sangam to strengthen South Asian representation on campus. My goal is to merge creativity, engineering, and social good—building tools that make information and innovation more accessible to everyone.
+              </p>
+            </div>
+          </div>
         </Section>
 
         <Section id="experience" title="Experience">
-          <div className="space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {currentExperiences.map((exp, index) => (
-                <article key={index} className="rounded-2xl border border-unc-slate/70 bg-white p-6 shadow-sm hover:shadow-md transition">
-                  <div className="flex justify-between items-start">
-                    <div>
-                      <h3 className="text-xl font-semibold text-unc-navy">{exp.company}</h3>
-                      <div className="mt-1">
-                        <h4 className="text-lg text-slate-700">{exp.title}</h4>
-                        <div className="text-sm text-slate-600">{exp.date} • {exp.location}</div>
+          <div className="flex items-center gap-4">
+            {/* Left arrow */}
+            {experienceTotalPages > 1 && (
+              <button
+                onClick={() => setExperiencePage((p) => Math.max(1, p - 1))}
+                disabled={experiencePage === 1}
+                className="rounded-full border-2 border-unc-navy/70 p-3 text-unc-navy hover:bg-unc-navy hover:text-white transition-all disabled:opacity-30 disabled:cursor-not-allowed flex-shrink-0"
+                aria-label="Previous page"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                </svg>
+              </button>
+            )}
+            
+            {/* Cards grid */}
+            <div className="flex-1">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {currentExperiences.map((exp, index) => (
+                <article 
+                  key={index} 
+                  className="rounded-2xl border border-unc-slate/70 p-6 shadow-sm hover:shadow-md transition relative overflow-hidden flex flex-col h-[600px]"
+                  style={{
+                    background: "linear-gradient(180deg, var(--unc-carolina) 0%, #eaf3fa 70%, var(--unc-offwhite) 100%)"
+                  }}
+                >
+                  {/* Header with fixed height */}
+                  <div className="flex justify-between items-start mb-4 min-h-[100px]">
+                    <div className="flex-1 pr-4">
+                      <h3 className="text-xl font-semibold text-unc-navy leading-tight">{exp.company}</h3>
+                      <h4 className="text-base text-slate-700 mt-2 leading-tight">{exp.title}</h4>
+                      <div className="text-xs text-slate-600 mt-2 space-y-0.5">
+                        <div>{exp.date}</div>
+                        <div>{exp.location}</div>
                       </div>
                     </div>
-                    {exp.image && (
-                      <div className="flex-shrink-0 ml-4">
+                    <div className="flex-shrink-0 w-12 h-12">
+                      {exp.image ? (
                         <img 
                           src={exp.image} 
                           alt={`${exp.company} logo`}
                           className="w-12 h-12 object-contain rounded-lg"
                         />
-                      </div>
+                      ) : (
+                        <div className="w-12 h-12"></div>
+                      )}
+                    </div>
+                  </div>
+                  
+                  {/* Description with scroll */}
+                  <div className="flex-1 overflow-y-auto mb-4">
+                    <p className="text-sm text-slate-600 leading-relaxed">{exp.description}</p>
+                  </div>
+                  
+                  {/* Footer with fixed height */}
+                  <div className="pt-3 border-t border-slate-300/50 h-[44px] flex items-center">
+                    {exp.link ? (
+                      <a
+                        href={exp.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-block text-sm font-medium text-blue-700 hover:text-blue-900 hover:underline"
+                      >
+                        Learn more →
+                      </a>
+                    ) : (
+                      <div className="h-5"></div>
                     )}
                   </div>
-                  <p className="mt-3 text-slate-600">{exp.description}</p>
-                  {exp.link && (
-                    <a
-                      href={exp.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="mt-4 inline-block text-sm font-medium text-unc-carolina hover:underline"
-                    >
-                      Learn more →
-                    </a>
-                  )}
                 </article>
               ))}
             </div>
+            
+            {/* Page indicator (optional, centered below cards) */}
             {experienceTotalPages > 1 && (
-              <div className="flex justify-center gap-2 pt-4">
-                <button
-                  onClick={() => setExperiencePage((p) => Math.max(1, p - 1))}
-                  disabled={experiencePage === 1}
-                  className="rounded-lg border border-unc-slate/70 px-4 py-2 text-sm font-medium disabled:opacity-50"
-                >
-                  Previous
-                </button>
-                <span className="flex items-center px-4 text-sm text-slate-600">
+              <div className="text-center mt-4">
+                <span className="text-sm text-slate-600">
                   Page {experiencePage} of {experienceTotalPages}
                 </span>
-                <button
-                  onClick={() => setExperiencePage((p) => Math.min(experienceTotalPages, p + 1))}
-                  disabled={experiencePage === experienceTotalPages}
-                  className="rounded-lg border border-unc-slate/70 px-4 py-2 text-sm font-medium disabled:opacity-50"
-                >
-                  Next
-                </button>
               </div>
+            )}
+          </div>
+            
+            {/* Right arrow */}
+            {experienceTotalPages > 1 && (
+              <button
+                onClick={() => setExperiencePage((p) => Math.min(experienceTotalPages, p + 1))}
+                disabled={experiencePage === experienceTotalPages}
+                className="rounded-full border-2 border-unc-navy/70 p-3 text-unc-navy hover:bg-unc-navy hover:text-white transition-all disabled:opacity-30 disabled:cursor-not-allowed flex-shrink-0"
+                aria-label="Next page"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </button>
             )}
           </div>
         </Section>
 
         <Section id="work" title="Projects">
-          <div className="space-y-6">
-            <div className="grid gap-6 grid-cols-1 sm:grid-cols-2">
-              {currentProjects.map((project, index) => (
+          <div className="flex items-center gap-4">
+            {/* Left arrow */}
+            {projectsTotalPages > 1 && (
+              <button
+                onClick={() => setProjectsPage((p) => Math.max(1, p - 1))}
+                disabled={projectsPage === 1}
+                className="rounded-full border-2 border-unc-navy/70 p-3 text-unc-navy hover:bg-unc-navy hover:text-white transition-all disabled:opacity-30 disabled:cursor-not-allowed flex-shrink-0"
+                aria-label="Previous page"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                </svg>
+              </button>
+            )}
+            
+            {/* Cards grid */}
+            <div className="flex-1">
+              <div className="grid gap-6 grid-cols-1 sm:grid-cols-2">
+                {currentProjects.map((project, index) => (
                 <article
                   key={index}
-                  className="group rounded-2xl border border-unc-slate/70 bg-white p-5 shadow-sm transition hover:shadow-md"
+                  className="group rounded-2xl border border-unc-slate/70 p-5 shadow-sm transition hover:shadow-md relative overflow-hidden"
+                  style={{
+                    background: "linear-gradient(180deg, var(--unc-carolina) 0%, #eaf3fa 70%, var(--unc-offwhite) 100%)"
+                  }}
                 >
                   <div className="flex justify-between items-center">
                     <h3 className="text-lg font-semibold">{project.title}</h3>
@@ -236,7 +320,7 @@ export default function Home() {
                       <h6 className="text-sm text-gray-500">
                         <a
                           href={project.href}
-                          className="text-blue-500 hover:underline"
+                          className="text-blue-700 hover:text-blue-900 hover:underline"
                           target="_blank"
                           rel="noopener noreferrer"
                         >
@@ -251,7 +335,7 @@ export default function Home() {
                       {project.tags.map((tag) => (
                         <span 
                           key={tag}
-                          className="rounded-full bg-unc-slate/40 px-2.5 py-1 text-xs font-medium text-slate-700"
+                          className="rounded-full bg-unc-slate/40 px-2.5 py-1 text-xs font-medium text-slate-700 transition-all duration-200 hover:scale-110 hover:shadow-lg hover:-translate-y-1 cursor-pointer"
                         >
                           {tag}
                         </span>
@@ -263,7 +347,7 @@ export default function Home() {
                       href={project.repo}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="mt-3 inline-block text-sm text-unc-carolina hover:underline"
+                      className="mt-3 inline-block text-sm text-blue-700 hover:text-blue-900 hover:underline"
                     >
                       View Source →
                     </a>
@@ -271,26 +355,29 @@ export default function Home() {
                 </article>
               ))}
             </div>
+            
+            {/* Page indicator */}
             {projectsTotalPages > 1 && (
-              <div className="flex justify-center gap-2 pt-4">
-                <button
-                  onClick={() => setProjectsPage((p) => Math.max(1, p - 1))}
-                  disabled={projectsPage === 1}
-                  className="rounded-lg border border-unc-slate/70 px-4 py-2 text-sm font-medium disabled:opacity-50"
-                >
-                  Previous
-                </button>
-                <span className="flex items-center px-4 text-sm text-slate-600">
+              <div className="text-center mt-4">
+                <span className="text-sm text-slate-600">
                   Page {projectsPage} of {projectsTotalPages}
                 </span>
-                <button
-                  onClick={() => setProjectsPage((p) => Math.min(projectsTotalPages, p + 1))}
-                  disabled={projectsPage === projectsTotalPages}
-                  className="rounded-lg border border-unc-slate/70 px-4 py-2 text-sm font-medium disabled:opacity-50"
-                >
-                  Next
-                </button>
               </div>
+            )}
+          </div>
+            
+            {/* Right arrow */}
+            {projectsTotalPages > 1 && (
+              <button
+                onClick={() => setProjectsPage((p) => Math.min(projectsTotalPages, p + 1))}
+                disabled={projectsPage === projectsTotalPages}
+                className="rounded-full border-2 border-unc-navy/70 p-3 text-unc-navy hover:bg-unc-navy hover:text-white transition-all disabled:opacity-30 disabled:cursor-not-allowed flex-shrink-0"
+                aria-label="Next page"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </button>
             )}
           </div>
         </Section>
@@ -319,7 +406,7 @@ export default function Home() {
         </Section>
 
         <footer className="py-10 text-center text-sm text-slate-600">
-          © {new Date().getFullYear()} Sai Kothapalli
+           Made with 🩵 by Sai Kothapalli
         </footer>
       </main>
     </>
@@ -336,8 +423,8 @@ function Section({
   children: React.ReactNode;
 }) {
   return (
-  <section id={id} className="min-h-[calc(100vh-88px)]">
-      <div className="mx-auto max-w-5xl px-4 py-20">
+  <section id={id} className="min-h-screen">
+      <div className="mx-auto max-w-5xl px-4 py-20 pb-32">
         <h2 className="font-serif text-3xl font-black tracking-tight text-unc-navy">{title}</h2>
         <div className="prose prose-slate mt-6 max-w-none">{children}</div>
       </div>
