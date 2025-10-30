@@ -132,7 +132,7 @@ export default function Home() {
                 Hello, I'm Sai Kothapalli
               </h1>
               <p className="mt-4 max-w-prose text-lg text-slate-700">
-                Computer Science and Economics with a minor in History at UNC-Chapel Hill.
+                Computer Science﹠Economics with History Minor @ UNC-Chapel Hill.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <button
