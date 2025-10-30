@@ -249,7 +249,7 @@ export default function Home() {
                         href={exp.link}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-block text-sm font-medium text-blue-700 hover:text-blue-900 hover:underline"
+                        className="inline-block text-sm font-medium text-blue-800 hover:underline hover:text-blue-900"
                       >
                         Learn more →
                       </a>
@@ -269,6 +269,7 @@ export default function Home() {
                 </span>
               </div>
             )}
+          </div>
             
             {/* Right arrow */}
             {experienceTotalPages > 1 && (
@@ -284,7 +285,6 @@ export default function Home() {
               </button>
             )}
           </div>
-        </Section>
         </Section>
 
         <Section id="work" title="Projects">
@@ -320,7 +320,7 @@ export default function Home() {
                       <h6 className="text-sm text-gray-500">
                         <a
                           href={project.href}
-                          className="text-blue-700 hover:text-blue-900 hover:underline"
+                          className="text-blue-800 hover:underline hover:text-blue-900"
                           target="_blank"
                           rel="noopener noreferrer"
                         >
@@ -347,7 +347,7 @@ export default function Home() {
                       href={project.repo}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="mt-3 inline-block text-sm text-blue-700 hover:text-blue-900 hover:underline"
+                      className="mt-3 inline-block text-sm text-blue-800 hover:underline hover:text-blue-900"
                     >
                       View Source →
                     </a>
@@ -364,6 +364,7 @@ export default function Home() {
                 </span>
               </div>
             )}
+          </div>
             
             {/* Right arrow */}
             {projectsTotalPages > 1 && (
@@ -379,7 +380,6 @@ export default function Home() {
               </button>
             )}
           </div>
-        </Section>
         </Section>
 
         <Section id="contact" title="Contact">
