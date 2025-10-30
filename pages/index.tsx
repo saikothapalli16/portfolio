@@ -269,7 +269,6 @@ export default function Home() {
                 </span>
               </div>
             )}
-          </div>
             
             {/* Right arrow */}
             {experienceTotalPages > 1 && (
@@ -285,6 +284,7 @@ export default function Home() {
               </button>
             )}
           </div>
+        </Section>
         </Section>
 
         <Section id="work" title="Projects">
@@ -364,7 +364,6 @@ export default function Home() {
                 </span>
               </div>
             )}
-          </div>
             
             {/* Right arrow */}
             {projectsTotalPages > 1 && (
@@ -380,6 +379,7 @@ export default function Home() {
               </button>
             )}
           </div>
+        </Section>
         </Section>
 
         <Section id="contact" title="Contact">
