@@ -64,7 +64,14 @@ export default function Home() {
   const scrollTo = (id: string) => {
     const el = document.getElementById(id);
     if (!el) return;
-  const y = el.getBoundingClientRect().top + window.scrollY - 40; // decreased offset for more scroll
+    // Ensure the Projects section's title (h2) sits closer to the top beneath the sticky header
+    const headerEl = document.querySelector("header") as HTMLElement | null;
+    const headerHeight = headerEl?.offsetHeight ?? 80; // h-20 ≈ 80px
+
+    // For Projects, align to the h2 inside the section; fallback to section element
+    const targetEl = id === "work" ? (el.querySelector("h2") as HTMLElement | null) ?? el : el;
+    const gap = id === "work" ? headerHeight + 8 : 40; // tighter placement for Projects
+    const y = targetEl.getBoundingClientRect().top + window.scrollY - gap;
     window.scrollTo({ top: y, behavior: "smooth" });
   };
 
@@ -305,15 +312,6 @@ export default function Home() {
             
             {/* Cards grid */}
             <div className="flex-1">
-              {/* Page indicator (moved above grid so it's always visible on first page) */}
-              {projectsTotalPages > 1 && (
-                <div className="text-center mb-3">
-                  <span className="text-xs sm:text-sm text-slate-600">
-                    Page {projectsPage} of {projectsTotalPages}
-                  </span>
-                </div>
-              )}
-
               <div className="grid gap-6 grid-cols-1 sm:grid-cols-2">
                 {currentProjects.map((project, index) => (
                 <article
@@ -365,6 +363,14 @@ export default function Home() {
               ))}
             </div>
             
+            {/* Page indicator */}
+            {projectsTotalPages > 1 && (
+              <div className="text-center mt-4">
+                <span className="text-sm text-slate-600">
+                  Page {projectsPage} of {projectsTotalPages}
+                </span>
+              </div>
+            )}
           </div>
             
             {/* Right arrow */}
