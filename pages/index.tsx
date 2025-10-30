@@ -2,57 +2,36 @@
 
 import Head from "next/head";
 import { useEffect, useState } from "react";
-
-type Project = {
-  title: string;
-  description: string;
-  image?: string;           // public path (e.g., "/images/p1.png")
-  tags?: string[];
-  href?: string;            // live/demo
-  repo?: string;            // GitHub
-};
-
-const PROJECTS: Project[] = [
-  {
-    title: "Portfolio Website",
-    description: "A responsive portfolio website built with Next.js and TailwindCSS featuring a UNC-inspired design system.",
-    tags: ["Next.js", "TypeScript", "TailwindCSS"],
-    href: "https://saikothapalli.com",
-    repo: "https://github.com/yourusername/portfolio"
-  },
-  {
-    title: "BeAM Tools Dashboard",
-    description: "Full-stack application for managing makerspace tools and improving workflows at UNC BeAM.",
-    tags: ["React", "Spring Boot", "PostgreSQL"],
-    image: "/images/beam-tools.png",
-    repo: "https://github.com/yourusername/beam-tools"
-  },
-  {
-    title: "Chapel Thrill Escapes",
-    description: "Interactive puzzle system built with React for Chapel Thrill Escapes, enhancing the escape room experience.",
-    tags: ["React", "Node.js", "MongoDB"],
-    image: "/images/escape-room.png",
-    href: "https://chapelthrillescapes.com"
-  },
-  {
-    title: "Data Analytics Platform",
-    description: "Cloud-based analytics platform leveraging AWS services for processing and visualizing large datasets.",
-    tags: ["Python", "AWS", "React"],
-    image: "/images/analytics.png",
-    repo: "https://github.com/yourusername/data-analytics"
-  }
-];
+import { Experience, EXPERIENCES } from "../data/experiences";
+import { Project, PROJECTS } from "../data/projects";
 
 type SectionId = "about" | "experience" | "work" | "contact";
 const SECTIONS: { id: SectionId; label: string }[] = [
   { id: "about", label: "About" },
   { id: "experience", label: "Experience" },
-  { id: "work", label: "Work" },
+  { id: "work", label: "Projects" },
   { id: "contact", label: "Contact" },
 ];
 
 export default function Home() {
   const [active, setActive] = useState<SectionId | "home">("home");
+
+  // Experience pagination (3 per page)
+  const [experiencePage, setExperiencePage] = useState(1);
+  const experiencesPerPage = 3;
+  const experienceTotalPages = Math.ceil(EXPERIENCES.length / experiencesPerPage);
+  const experienceStart = (experiencePage - 1) * experiencesPerPage;
+  const currentExperiences = EXPERIENCES.slice(
+    experienceStart,
+    experienceStart + experiencesPerPage
+  );
+
+  // Projects pagination (2x2 grid => 4 per page)
+  const [projectsPage, setProjectsPage] = useState(1);
+  const projectsPerPage = 4;
+  const projectsTotalPages = Math.ceil(PROJECTS.length / projectsPerPage);
+  const projectsStart = (projectsPage - 1) * projectsPerPage;
+  const currentProjects = PROJECTS.slice(projectsStart, projectsStart + projectsPerPage);
 
   useEffect(() => {
     const obs = new IntersectionObserver(
@@ -60,11 +39,20 @@ export default function Home() {
         const vis = entries
           .filter((e) => e.isIntersecting)
           .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+        
+        // If we're near the top of the page, set active to "home"
+        if (window.scrollY < 100) {
+          setActive("home");
+          return;
+        }
+        
+        // Otherwise, highlight the current section
         if (vis[0]) setActive(vis[0].target.id as SectionId);
       },
-      { threshold: 0.55 }
+      { threshold: 0.3 }
     );
-    SECTIONS.forEach(({ id }) => {
+    // Observe all sections including home
+    ["home", ...SECTIONS.map(s => s.id)].forEach((id) => {
       const el = document.getElementById(id);
       if (el) obs.observe(el);
     });
@@ -74,7 +62,7 @@ export default function Home() {
   const scrollTo = (id: string) => {
     const el = document.getElementById(id);
     if (!el) return;
-    const y = el.getBoundingClientRect().top + window.scrollY - 88; // header height
+  const y = el.getBoundingClientRect().top + window.scrollY - 40; // decreased offset for more scroll
     window.scrollTo({ top: y, behavior: "smooth" });
   };
 
@@ -97,17 +85,18 @@ export default function Home() {
               Sai Kothapalli
             </button>
 
-            <nav className="flex gap-1">
+            <nav className="flex gap-2">
               {SECTIONS.map(({ id, label }) => {
                 const isActive = active === id;
                 return (
                   <button
                     key={id}
                     onClick={() => scrollTo(id)}
-                    className="rounded-full px-4 py-2 text-sm font-medium transition hover:bg-unc-slate/60"
+                    className="rounded-full px-5 py-2.5 text-base font-semibold transition-all hover:bg-unc-navy hover:text-white hover:shadow-md"
                     style={{
-                      color: isActive ? "var(--unc-navy)" : "rgb(15 23 42)",
-                      background: isActive ? "var(--unc-slate)" : "transparent",
+                      color: isActive ? "white" : "var(--unc-navy)",
+                      background: isActive ? "var(--unc-navy)" : "var(--unc-slate)/10",
+                      boxShadow: isActive ? "0 2px 4px rgba(0,0,0,0.1)" : "none",
                     }}
                     aria-current={isActive ? "page" : undefined}
                   >
@@ -120,7 +109,7 @@ export default function Home() {
         </header>
 
         {/* Hero */}
-        <section id="home" className="relative flex min-h-[78vh] items-center">
+  <section id="home" className="relative flex min-h-screen items-center">
           <div
             className="pointer-events-none absolute inset-0"
             style={{
@@ -141,7 +130,7 @@ export default function Home() {
                   onClick={() => scrollTo("work")}
                   className="rounded-xl bg-unc-navy px-5 py-3 font-semibold text-white shadow-sm transition hover:shadow"
                 >
-                  View Work
+                  View Projects
                 </button>
                 <button
                   onClick={() => scrollTo("contact")}
@@ -173,67 +162,136 @@ export default function Home() {
         </Section>
 
         <Section id="experience" title="Experience">
-          <ul className="list-inside list-disc space-y-2">
-            <li>BeAM Makerspace — built tools and improved workflows.</li>
-            <li>Chapel Thrill Escapes — refactor & React puzzle work.</li>
-            <li>Projects across SWE, data, and DevOps.</li>
-          </ul>
-        </Section>
-
-        <Section id="work" title="Work">
-          <div className="grid gap-6 sm:grid-cols-2">
-            {PROJECTS.map((project, index) => (
-              <article
-                key={index}
-                className="group rounded-2xl border border-unc-slate/70 bg-white p-5 shadow-sm transition hover:shadow-md"
-              >
-                <h3 className="font-serif text-xl font-bold text-unc-navy">{project.title}</h3>
-                <p className="mt-2 text-slate-700">{project.description}</p>
-                {project.image ? (
-                  <img 
-                    src={project.image} 
-                    alt={project.title}
-                    className="mt-3 h-32 w-full rounded-xl object-cover"
-                  />
-                ) : (
-                  <div className="mt-3 h-32 rounded-xl bg-slate-100" />
-                )}
-                {project.tags && (
-                  <div className="mt-3 flex flex-wrap gap-2">
-                    {project.tags.map((tag) => (
-                      <span 
-                        key={tag}
-                        className="rounded-full bg-unc-slate/40 px-2.5 py-1 text-xs font-medium text-slate-700"
-                      >
-                        {tag}
-                      </span>
-                    ))}
+          <div className="space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {currentExperiences.map((exp, index) => (
+                <article key={index} className="rounded-2xl border border-unc-slate/70 bg-white p-6 shadow-sm hover:shadow-md transition">
+                  <div className="flex justify-between items-start">
+                    <div>
+                      <h3 className="text-xl font-semibold text-unc-navy">{exp.company}</h3>
+                      <div className="mt-1">
+                        <h4 className="text-lg text-slate-700">{exp.title}</h4>
+                        <div className="text-sm text-slate-600">{exp.date} • {exp.location}</div>
+                      </div>
+                    </div>
+                    {exp.image && (
+                      <div className="flex-shrink-0 ml-4">
+                        <img 
+                          src={exp.image} 
+                          alt={`${exp.company} logo`}
+                          className="w-12 h-12 object-contain rounded-lg"
+                        />
+                      </div>
+                    )}
                   </div>
-                )}
-                <div className="mt-4 flex gap-3">
-                  {project.href && (
+                  <p className="mt-3 text-slate-600">{exp.description}</p>
+                  {exp.link && (
                     <a
-                      href={project.href}
+                      href={exp.link}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-sm font-medium text-unc-carolina hover:text-unc-navy"
+                      className="mt-4 inline-block text-sm font-medium text-unc-carolina hover:underline"
                     >
-                      Demo →
+                      Learn more →
                     </a>
+                  )}
+                </article>
+              ))}
+            </div>
+            {experienceTotalPages > 1 && (
+              <div className="flex justify-center gap-2 pt-4">
+                <button
+                  onClick={() => setExperiencePage((p) => Math.max(1, p - 1))}
+                  disabled={experiencePage === 1}
+                  className="rounded-lg border border-unc-slate/70 px-4 py-2 text-sm font-medium disabled:opacity-50"
+                >
+                  Previous
+                </button>
+                <span className="flex items-center px-4 text-sm text-slate-600">
+                  Page {experiencePage} of {experienceTotalPages}
+                </span>
+                <button
+                  onClick={() => setExperiencePage((p) => Math.min(experienceTotalPages, p + 1))}
+                  disabled={experiencePage === experienceTotalPages}
+                  className="rounded-lg border border-unc-slate/70 px-4 py-2 text-sm font-medium disabled:opacity-50"
+                >
+                  Next
+                </button>
+              </div>
+            )}
+          </div>
+        </Section>
+
+        <Section id="work" title="Projects">
+          <div className="space-y-6">
+            <div className="grid gap-6 grid-cols-1 sm:grid-cols-2">
+              {currentProjects.map((project, index) => (
+                <article
+                  key={index}
+                  className="group rounded-2xl border border-unc-slate/70 bg-white p-5 shadow-sm transition hover:shadow-md"
+                >
+                  <div className="flex justify-between items-center">
+                    <h3 className="text-lg font-semibold">{project.title}</h3>
+                    {project.href && (
+                      <h6 className="text-sm text-gray-500">
+                        <a
+                          href={project.href}
+                          className="text-blue-500 hover:underline"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          View Project
+                        </a>
+                      </h6>
+                    )}
+                  </div>
+                  <p className="text-base font-normal mt-2">{project.description}</p>
+                  {project.tags && (
+                    <div className="mt-3 flex flex-wrap gap-2">
+                      {project.tags.map((tag) => (
+                        <span 
+                          key={tag}
+                          className="rounded-full bg-unc-slate/40 px-2.5 py-1 text-xs font-medium text-slate-700"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
                   )}
                   {project.repo && (
                     <a
                       href={project.repo}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-sm font-medium text-unc-carolina hover:text-unc-navy"
+                      className="mt-3 inline-block text-sm text-unc-carolina hover:underline"
                     >
-                      GitHub →
+                      View Source →
                     </a>
                   )}
-                </div>
-              </article>
-            ))}
+                </article>
+              ))}
+            </div>
+            {projectsTotalPages > 1 && (
+              <div className="flex justify-center gap-2 pt-4">
+                <button
+                  onClick={() => setProjectsPage((p) => Math.max(1, p - 1))}
+                  disabled={projectsPage === 1}
+                  className="rounded-lg border border-unc-slate/70 px-4 py-2 text-sm font-medium disabled:opacity-50"
+                >
+                  Previous
+                </button>
+                <span className="flex items-center px-4 text-sm text-slate-600">
+                  Page {projectsPage} of {projectsTotalPages}
+                </span>
+                <button
+                  onClick={() => setProjectsPage((p) => Math.min(projectsTotalPages, p + 1))}
+                  disabled={projectsPage === projectsTotalPages}
+                  className="rounded-lg border border-unc-slate/70 px-4 py-2 text-sm font-medium disabled:opacity-50"
+                >
+                  Next
+                </button>
+              </div>
+            )}
           </div>
         </Section>
 
@@ -278,7 +336,7 @@ function Section({
   children: React.ReactNode;
 }) {
   return (
-    <section id={id} className="scroll-mt-28">
+  <section id={id} className="min-h-[calc(100vh-88px)]">
       <div className="mx-auto max-w-5xl px-4 py-20">
         <h2 className="font-serif text-3xl font-black tracking-tight text-unc-navy">{title}</h2>
         <div className="prose prose-slate mt-6 max-w-none">{children}</div>
