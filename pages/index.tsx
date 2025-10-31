@@ -4,6 +4,7 @@ import Head from "next/head";
 import { useEffect, useState } from "react";
 import { Experience, EXPERIENCES } from "../data/experiences";
 import { Project, PROJECTS } from "../data/projects";
+import { Contact, CONTACTS } from "../data/contact_data";
 import HeroImage from "../components/HeroImage";
 
 
@@ -349,16 +350,6 @@ export default function Home() {
                       ))}
                     </div>
                   )}
-                  {project.repo && (
-                    <a
-                      href={project.repo}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="mt-3 inline-block text-sm text-blue-800 hover:underline hover:text-blue-900"
-                    >
-                      View Source →
-                    </a>
-                  )}
                 </article>
               ))}
             </div>
@@ -390,26 +381,26 @@ export default function Home() {
         </Section>
 
         <Section id="contact" title="Contact">
-          <form
-            className="space-y-4 rounded-2xl border border-unc-slate/70 bg-white p-6 shadow-sm"
-            onSubmit={(e) => {
-              e.preventDefault();
-              alert("Thanks! Replace with your form logic.");
-            }}
-          >
-            <Field label="Name">
-              <input className="input" placeholder="Your name" required />
-            </Field>
-            <Field label="Email">
-              <input type="email" className="input" placeholder="you@unc.edu" required />
-            </Field>
-            <Field label="Message">
-              <textarea className="input" rows={5} placeholder="Say hello!" required />
-            </Field>
-            <button type="submit" className="btn-primary">
-              Send
-            </button>
-          </form>
+          <div className="flex flex-wrap justify-center items-center gap-8 mt-8">
+            {CONTACTS.map((contact, index) => (
+              <a
+                key={index}
+                href={contact.link}
+                target={contact.link.startsWith("http") ? "_blank" : undefined}
+                rel={contact.link.startsWith("http") ? "noopener noreferrer" : undefined}
+                className="group transition-transform duration-200 hover:scale-110"
+                aria-label={contact.title}
+              >
+                {contact.image && (
+                  <img
+                    src={contact.image}
+                    alt={contact.title}
+                    className="w-16 h-16 object-contain transition-all duration-200 group-hover:drop-shadow-lg"
+                  />
+                )}
+              </a>
+            ))}
+          </div>
         </Section>
 
         <footer className="py-10 text-center text-sm text-slate-600">
@@ -430,8 +421,8 @@ function Section({
   children: React.ReactNode;
 }) {
   return (
-  <section id={id} className="min-h-screen">
-      <div className="mx-auto max-w-5xl px-4 py-20 pb-32">
+  <section id={id} className={id === "contact" ? "" : "min-h-screen"}>
+      <div className={id === "contact" ? "mx-auto max-w-5xl px-4 py-12" : "mx-auto max-w-5xl px-4 py-20 pb-32"}>
         <h2 className="font-serif text-3xl font-black tracking-tight text-unc-navy">{title}</h2>
         <div className="prose prose-slate mt-6 max-w-none">{children}</div>
       </div>
