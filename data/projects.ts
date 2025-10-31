@@ -24,7 +24,6 @@ export const PROJECTS: Project[] = [
     title: "Oriole",
     description: "Built Oriole, a full-stack social media platform using Next.js, Supabase, Drizzle ORM, and tRPC, featuring user authentication, post creation, likes, follows, and image uploads. Implemented infinite scrolling, type-safe APIs, and real-time data handling with Supabase backend integration and responsive UI via shadcn/ui.",
     tags: ["Next.js", "React", "Supabase", "PostgreSQL"],
-    href: "https://chapelthrillescapes.com"
   },
   {
     title: "PokeDex",
