@@ -1,12 +1,10 @@
-import { link } from "fs";
-
 export interface Contact {
-    title: string;
+  title: string;
   image?: string;
-  link?: string;
+  link: string;
 }
 
-export const EXPERIENCES: Contact[] = [ 
+export const CONTACTS: Contact[] = [ 
     {
         title: "Email",
         image: "/email.png",
@@ -26,7 +24,7 @@ export const EXPERIENCES: Contact[] = [
 {
     title: "Resume",
     image: "/resume.png",
-    link: "/Sai_Kothapalli_Resume.pdf"
+    link: "/Sai_Kothapalli_Resume_Final.pdf"
 },
 {
     title: "Instagram",
