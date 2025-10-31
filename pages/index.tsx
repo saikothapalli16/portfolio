@@ -381,14 +381,14 @@ export default function Home() {
         </Section>
 
         <Section id="contact" title="Contact">
-          <div className="flex flex-wrap justify-center items-center gap-8 mt-8">
+          <div className="flex flex-wrap justify-center items-center gap-8 mt-4">
             {CONTACTS.map((contact, index) => (
               <a
                 key={index}
                 href={contact.link}
                 target={contact.link.startsWith("http") ? "_blank" : undefined}
                 rel={contact.link.startsWith("http") ? "noopener noreferrer" : undefined}
-                className="group transition-transform duration-200 hover:scale-110"
+                className="group flex flex-col items-center transition-transform duration-200 hover:scale-110"
                 aria-label={contact.title}
               >
                 {contact.image && (
@@ -398,6 +398,7 @@ export default function Home() {
                     className="w-16 h-16 object-contain transition-all duration-200 group-hover:drop-shadow-lg"
                   />
                 )}
+                <span className="mt-2 text-xs text-slate-600">{contact.title}</span>
               </a>
             ))}
           </div>
