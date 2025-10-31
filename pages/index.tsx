@@ -86,23 +86,23 @@ export default function Home() {
       <main>
         {/* Header */}
         <header className="sticky top-0 z-50 border-b border-unc-slate/60 bg-white/70 backdrop-blur">
-          <div className="mx-auto flex h-20 max-w-6xl items-center justify-between px-4">
+          <div className="mx-auto flex h-16 sm:h-20 max-w-6xl items-center justify-between px-3 sm:px-4">
             <button
               onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-              className="font-serif text-2xl font-black tracking-tight text-unc-navy"
+              className="font-serif text-lg sm:text-2xl font-black tracking-tight text-unc-navy"
               aria-label="Go to top"
             >
               Sai Kothapalli
             </button>
 
-            <nav className="flex gap-2">
+            <nav className="flex gap-1 sm:gap-2">
               {SECTIONS.map(({ id, label }) => {
                 const isActive = active === id;
                 return (
                   <button
                     key={id}
                     onClick={() => scrollTo(id)}
-                    className="rounded-full px-5 py-2.5 text-base font-semibold transition-all hover:bg-unc-navy hover:text-white hover:shadow-md"
+                    className="rounded-full px-2 py-1.5 sm:px-5 sm:py-2.5 text-xs sm:text-base font-semibold transition-all hover:bg-unc-navy hover:text-white hover:shadow-md"
                     style={{
                       color: isActive ? "white" : "var(--unc-navy)",
                       background: isActive ? "var(--unc-navy)" : "var(--unc-slate)/10",
@@ -129,35 +129,35 @@ export default function Home() {
           />
           <div className="relative mx-auto grid max-w-6xl grid-cols-1 items-center gap-10 px-4 py-16 md:grid-cols-2">
             <div>
-              <h1 className="font-serif text-5xl font-black leading-tight text-unc-navy md:text-6xl">
+              <h1 className="font-serif text-4xl sm:text-5xl font-black leading-tight text-unc-navy md:text-6xl">
                 Hello, I'm Sai Kothapalli
               </h1>
-              <p className="mt-4 max-w-prose text-lg text-slate-700">
+              <p className="mt-4 max-w-prose text-base sm:text-lg text-slate-700">
                 Computer Science﹠Economics with History Minor @ UNC-Chapel Hill.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <button
                   onClick={() => scrollTo("work")}
-                  className="rounded-xl bg-unc-navy px-5 py-3 font-semibold text-white shadow-sm transition hover:shadow"
+                  className="rounded-xl bg-unc-navy px-4 sm:px-5 py-2.5 sm:py-3 text-sm sm:text-base font-semibold text-white shadow-sm transition hover:shadow"
                 >
                   View Projects
                 </button>
                 <button
                   onClick={() => scrollTo("contact")}
-                  className="rounded-xl border border-unc-navy/30 bg-white px-5 py-3 font-semibold text-unc-navy transition hover:shadow-sm"
+                  className="rounded-xl border border-unc-navy/30 bg-white px-4 sm:px-5 py-2.5 sm:py-3 text-sm sm:text-base font-semibold text-unc-navy transition hover:shadow-sm"
                 >
                   Contact
                 </button>
               </div>
             </div>
 
-                    <div className="mt-16 w-full max-w-xl flex-shrink-0 lg:mt-0">
+                    <div className="mt-8 md:mt-16 w-full max-w-xl flex-shrink-0 lg:mt-0">
           {/* card shell you had */}
-          <div className="rounded-2xl bg-white p-6 shadow-xl ring-1 ring-slate-900/10">
+          <div className="rounded-2xl bg-white p-4 sm:p-6 shadow-xl ring-1 ring-slate-900/10">
             {/* header bars etc. can go above if you still want them */}
             <HeroImage />
 
-            <p className="mt-4 text-sm text-slate-600 text-center">
+            <p className="mt-4 text-xs sm:text-sm text-slate-600 text-center">
               The Old Well, UNC-Chapel Hill
             </p>
           </div>
@@ -168,7 +168,7 @@ export default function Home() {
 
         {/* Sections */}
         <Section id="about" title="About">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 items-center">
             {/* Image on the left with 3D effect */}
             <div 
               className="rounded-2xl overflow-hidden bg-slate-100 border border-slate-200 shadow-sm"
@@ -178,7 +178,7 @@ export default function Home() {
                 <img 
                   src="/about-image.jpg" 
                   alt="About me"
-                  className="w-full h-[500px] object-cover transition-transform duration-300 hover:scale-105"
+                  className="w-full h-[300px] sm:h-[400px] md:h-[500px] object-cover transition-transform duration-300 hover:scale-105"
                   style={{
                     transformOrigin: "center center"
                   }}
@@ -188,8 +188,8 @@ export default function Home() {
             
             {/* Text on the right */}
             <div>
-              <p className="text-lg leading-relaxed text-slate-700">
-                I’m Sai Kothapalli, a Computer Science and Economics student at UNC–Chapel Hill with a passion for building technology that connects people, tells stories, and drives real-world impact. Whether I’m developing full-stack applications that streamline how communities share ideas, experimenting with machine learning projects that uncover patterns in data, or helping design interactive puzzles for Chapel Thrill Escapes, I love turning complex systems into intuitive experiences. Outside of coding, I work at the BeAM Makerspace, where I help others bring creative projects to life, and I lead cultural initiatives through Sangam to strengthen South Asian representation on campus. My goal is to merge creativity, engineering, and social good—building tools that make information and innovation more accessible to everyone.
+              <p className="text-sm sm:text-base md:text-lg leading-relaxed text-slate-700">
+                I'm Sai Kothapalli, a Computer Science and Economics student at UNC–Chapel Hill with a passion for building technology that connects people, tells stories, and drives real-world impact. Whether I'm developing full-stack applications that streamline how communities share ideas, experimenting with machine learning projects that uncover patterns in data, or helping design interactive puzzles for Chapel Thrill Escapes, I love turning complex systems into intuitive experiences. Outside of coding, I work at the BeAM Makerspace, where I help others bring creative projects to life, and I lead cultural initiatives through Sangam to strengthen South Asian representation on campus. My goal is to merge creativity, engineering, and social good—building tools that make information and innovation more accessible to everyone.
               </p>
             </div>
           </div>
@@ -202,10 +202,10 @@ export default function Home() {
               <button
                 onClick={() => setExperiencePage((p) => Math.max(1, p - 1))}
                 disabled={experiencePage === 1}
-                className="rounded-full border-2 border-unc-navy/70 p-3 text-unc-navy hover:bg-unc-navy hover:text-white transition-all disabled:opacity-30 disabled:cursor-not-allowed flex-shrink-0"
+                className="rounded-full border-2 border-unc-navy/70 p-2 sm:p-3 text-unc-navy hover:bg-unc-navy hover:text-white transition-all disabled:opacity-30 disabled:cursor-not-allowed flex-shrink-0"
                 aria-label="Previous page"
               >
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 sm:h-6 sm:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                 </svg>
               </button>
@@ -217,41 +217,41 @@ export default function Home() {
                 {currentExperiences.map((exp, index) => (
                 <article 
                   key={index} 
-                  className="rounded-2xl border border-unc-slate/70 p-6 shadow-sm hover:shadow-md transition relative overflow-hidden flex flex-col h-[600px]"
+                  className="rounded-2xl border border-unc-slate/70 p-4 sm:p-6 shadow-sm hover:shadow-md transition relative overflow-hidden flex flex-col h-[500px] sm:h-[600px]"
                   style={{
                     background: "linear-gradient(180deg, var(--unc-carolina) 0%, #eaf3fa 70%, var(--unc-offwhite) 100%)"
                   }}
                 >
                   {/* Header with fixed height */}
-                  <div className="flex justify-between items-start mb-4 min-h-[100px]">
-                    <div className="flex-1 pr-4">
-                      <h3 className="text-xl font-semibold text-unc-navy leading-tight">{exp.company}</h3>
-                      <h4 className="text-base text-slate-700 mt-2 leading-tight">{exp.title}</h4>
-                      <div className="text-xs text-slate-600 mt-2 space-y-0.5">
+                  <div className="flex justify-between items-start mb-3 sm:mb-4 min-h-[90px] sm:min-h-[100px]">
+                    <div className="flex-1 pr-3 sm:pr-4">
+                      <h3 className="text-lg sm:text-xl font-semibold text-unc-navy leading-tight">{exp.company}</h3>
+                      <h4 className="text-sm sm:text-base text-slate-700 mt-1.5 sm:mt-2 leading-tight">{exp.title}</h4>
+                      <div className="text-xs text-slate-600 mt-1.5 sm:mt-2 space-y-0.5">
                         <div>{exp.date}</div>
                         <div>{exp.location}</div>
                       </div>
                     </div>
-                    <div className="flex-shrink-0 w-12 h-12">
+                    <div className="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12">
                       {exp.image ? (
                         <img 
                           src={exp.image} 
                           alt={`${exp.company} logo`}
-                          className="w-12 h-12 object-contain rounded-lg"
+                          className="w-10 h-10 sm:w-12 sm:h-12 object-contain rounded-lg"
                         />
                       ) : (
-                        <div className="w-12 h-12"></div>
+                        <div className="w-10 h-10 sm:w-12 sm:h-12"></div>
                       )}
                     </div>
                   </div>
                   
                   {/* Description with scroll */}
-                  <div className="flex-1 overflow-y-auto mb-4">
-                    <p className="text-sm text-slate-600 leading-relaxed">{exp.description}</p>
+                  <div className="flex-1 overflow-y-auto mb-3 sm:mb-4">
+                    <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">{exp.description}</p>
                   </div>
                   
                   {/* Footer with fixed height */}
-                  <div className="pt-3 border-t border-slate-300/50 h-[44px] flex items-center">
+                  <div className="pt-2 sm:pt-3 border-t border-slate-300/50 h-[40px] sm:h-[44px] flex items-center">
                     {exp.link ? (
                       <a
                         href={exp.link}
@@ -284,10 +284,10 @@ export default function Home() {
               <button
                 onClick={() => setExperiencePage((p) => Math.min(experienceTotalPages, p + 1))}
                 disabled={experiencePage === experienceTotalPages}
-                className="rounded-full border-2 border-unc-navy/70 p-3 text-unc-navy hover:bg-unc-navy hover:text-white transition-all disabled:opacity-30 disabled:cursor-not-allowed flex-shrink-0"
+                className="rounded-full border-2 border-unc-navy/70 p-2 sm:p-3 text-unc-navy hover:bg-unc-navy hover:text-white transition-all disabled:opacity-30 disabled:cursor-not-allowed flex-shrink-0"
                 aria-label="Next page"
               >
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 sm:h-6 sm:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                 </svg>
               </button>
@@ -302,10 +302,10 @@ export default function Home() {
               <button
                 onClick={() => setProjectsPage((p) => Math.max(1, p - 1))}
                 disabled={projectsPage === 1}
-                className="rounded-full border-2 border-unc-navy/70 p-3 text-unc-navy hover:bg-unc-navy hover:text-white transition-all disabled:opacity-30 disabled:cursor-not-allowed flex-shrink-0"
+                className="rounded-full border-2 border-unc-navy/70 p-2 sm:p-3 text-unc-navy hover:bg-unc-navy hover:text-white transition-all disabled:opacity-30 disabled:cursor-not-allowed flex-shrink-0"
                 aria-label="Previous page"
               >
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 sm:h-6 sm:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                 </svg>
               </button>
@@ -313,19 +313,19 @@ export default function Home() {
             
             {/* Cards grid */}
             <div className="flex-1">
-              <div className="grid gap-6 grid-cols-1 sm:grid-cols-2">
+              <div className="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2">
                 {currentProjects.map((project, index) => (
                 <article
                   key={index}
-                  className="group rounded-2xl border border-unc-slate/70 p-5 shadow-sm transition hover:shadow-md relative overflow-hidden"
+                  className="group rounded-2xl border border-unc-slate/70 p-4 sm:p-5 shadow-sm transition hover:shadow-md relative overflow-hidden"
                   style={{
                     background: "linear-gradient(180deg, var(--unc-carolina) 0%, #eaf3fa 70%, var(--unc-offwhite) 100%)"
                   }}
                 >
                   <div className="flex justify-between items-center">
-                    <h3 className="text-lg font-semibold">{project.title}</h3>
+                    <h3 className="text-base sm:text-lg font-semibold">{project.title}</h3>
                     {project.href && (
-                      <h6 className="text-sm text-gray-500">
+                      <h6 className="text-xs sm:text-sm text-gray-500">
                         <a
                           href={project.href}
                           className="text-blue-800 hover:underline hover:text-blue-900"
@@ -337,7 +337,7 @@ export default function Home() {
                       </h6>
                     )}
                   </div>
-                  <p className="text-base font-normal mt-2">{project.description}</p>
+                  <p className="text-sm sm:text-base font-normal mt-2">{project.description}</p>
                   {project.tags && (
                     <div className="mt-3 flex flex-wrap gap-2">
                       {project.tags.map((tag) => (
@@ -369,10 +369,10 @@ export default function Home() {
               <button
                 onClick={() => setProjectsPage((p) => Math.min(projectsTotalPages, p + 1))}
                 disabled={projectsPage === projectsTotalPages}
-                className="rounded-full border-2 border-unc-navy/70 p-3 text-unc-navy hover:bg-unc-navy hover:text-white transition-all disabled:opacity-30 disabled:cursor-not-allowed flex-shrink-0"
+                className="rounded-full border-2 border-unc-navy/70 p-2 sm:p-3 text-unc-navy hover:bg-unc-navy hover:text-white transition-all disabled:opacity-30 disabled:cursor-not-allowed flex-shrink-0"
                 aria-label="Next page"
               >
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 sm:h-6 sm:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                 </svg>
               </button>
@@ -381,7 +381,7 @@ export default function Home() {
         </Section>
 
         <Section id="contact" title="Contact">
-          <div className="flex flex-wrap justify-center items-center gap-8 mt-4">
+          <div className="flex flex-wrap justify-center items-center gap-6 sm:gap-8 mt-4">
             {CONTACTS.map((contact, index) => (
               <a
                 key={index}
@@ -395,7 +395,7 @@ export default function Home() {
                   <img
                     src={contact.image}
                     alt={contact.title}
-                    className="w-16 h-16 object-contain transition-all duration-200 group-hover:drop-shadow-lg"
+                    className="w-12 h-12 sm:w-16 sm:h-16 object-contain transition-all duration-200 group-hover:drop-shadow-lg"
                   />
                 )}
                 <span className="mt-2 text-xs text-slate-600">{contact.title}</span>
@@ -423,9 +423,9 @@ function Section({
 }) {
   return (
   <section id={id} className={id === "contact" ? "" : "min-h-screen"}>
-      <div className={id === "contact" ? "mx-auto max-w-5xl px-4 py-12" : "mx-auto max-w-5xl px-4 py-20 pb-32"}>
-        <h2 className="font-serif text-3xl font-black tracking-tight text-unc-navy">{title}</h2>
-        <div className="prose prose-slate mt-6 max-w-none">{children}</div>
+      <div className={id === "contact" ? "mx-auto max-w-5xl px-3 sm:px-4 py-8 sm:py-12" : "mx-auto max-w-5xl px-3 sm:px-4 py-12 sm:py-20 pb-20 sm:pb-32"}>
+        <h2 className="font-serif text-2xl sm:text-3xl font-black tracking-tight text-unc-navy">{title}</h2>
+        <div className="prose prose-slate mt-4 sm:mt-6 max-w-none">{children}</div>
       </div>
     </section>
   );
