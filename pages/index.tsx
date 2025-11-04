@@ -1,6 +1,7 @@
 "use client";
 
 import Head from "next/head";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import { Experience, EXPERIENCES } from "../data/experiences";
 import { Project, PROJECTS } from "../data/projects";
@@ -89,10 +90,16 @@ export default function Home() {
           <div className="mx-auto flex h-16 sm:h-20 max-w-6xl items-center justify-between px-3 sm:px-4">
             <button
               onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-              className="font-serif text-lg sm:text-2xl font-black tracking-tight text-unc-navy"
+              className="flex items-center hover:opacity-80 transition-opacity"
               aria-label="Go to top"
             >
-              Sai Kothapalli
+              <Image
+                src="/sailogo.png"
+                alt="Sai Kothapalli Logo"
+                width={70}
+                height={40}
+                className="h-8 w-auto sm:h-10"
+              />
             </button>
 
             <nav className="flex gap-1 sm:gap-2">
