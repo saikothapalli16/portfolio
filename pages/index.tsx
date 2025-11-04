@@ -224,7 +224,7 @@ export default function Home() {
                 {currentExperiences.map((exp, index) => (
                 <article 
                   key={index} 
-                  className="rounded-2xl border border-unc-slate/70 p-4 sm:p-6 shadow-sm hover:shadow-md transition relative overflow-hidden flex flex-col h-[500px] sm:h-[600px]"
+                  className="rounded-2xl border border-unc-slate/70 p-4 sm:p-6 shadow-sm hover:shadow-md transition relative overflow-hidden flex flex-col min-h-[400px] sm:min-h-[450px]"
                   style={{
                     background: "linear-gradient(180deg, var(--unc-carolina) 0%, #eaf3fa 70%, var(--unc-offwhite) 100%)"
                   }}
