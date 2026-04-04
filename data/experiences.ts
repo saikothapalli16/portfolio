@@ -10,13 +10,13 @@ export interface Experience {
 
 export const EXPERIENCES: Experience[] = [
   {
-    title: "Position Assistant",
-    company: "BeAM Makerspace",
-    description: "Training students and staff on tools such as laser cutters, 3D printers, and embroidery machines while ensuring safe and efficient workshop operations. Supports creative projects from concept to completion and fosters a collaborative environment that empowers makers of all skill levels.",
-    image: "/beam.png",
-    link: "https://beam.unc.edu/",
-    date: "February 2024 - Present",
-    location: "Chapel Hill, NC"
+    title: "Software Engineering Intern",
+    company: "SAS Institute",
+    description: "Incoming Software Engineering Intern at SAS Institute. Working on the Cloud Data Exchange Team.",
+    image: "/sas.svg",
+    link: "https://www.sas.com/en_us/home.html",
+    date: "May 2026 - August 2026",
+    location: "Cary, NC"
   },
   {
     title: "Building Team Engineer",
@@ -27,6 +27,17 @@ export const EXPERIENCES: Experience[] = [
     date: "September 2025 - Present",
     location: "Chapel Hill, NC"
   },
+
+  {
+    title: "Program Assistant",
+    company: "BeAM Makerspace",
+    description: "Training students and staff on tools such as laser cutters, 3D printers, and embroidery machines while ensuring safe and efficient workshop operations. Supports creative projects from concept to completion and fosters a collaborative environment that empowers makers of all skill levels.",
+    image: "/beam.png",
+    link: "https://beam.unc.edu/",
+    date: "February 2024 - Present",
+    location: "Chapel Hill, NC"
+  },
+  
   {
     title: "Marketing Intern",
     company: "Dora Bruschi Cosmetics",
