@@ -9,6 +9,12 @@ export interface Project {
 
 export const PROJECTS: Project[] = [
   {
+    title: "Commune",
+    description: "Developed LinguaCV, an AI-powered resume builder integrating a Vapi conversational agent with a React front end and Flask back end, featuring REST APIs, real-time updates, and object-oriented data modeling.",
+    tags: ["React", "TypeScript", "Next.js", "Supabase", "OpenAI"],
+    href: "https://github.com/comp426-25f/final-project-team-17",
+  },
+  {
     title: "LinguaCV (Steelhacks 2025)",
     description: "Developed LinguaCV, an AI-powered resume builder integrating a Vapi conversational agent with a React front end and Flask back end, featuring REST APIs, real-time updates, and object-oriented data modeling.",
     tags: ["React", "TypeScript", "Flask", "Python", "AI", "Rest API"],
