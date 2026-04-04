@@ -10,7 +10,7 @@ export interface Project {
 export const PROJECTS: Project[] = [
   {
     title: "Commune",
-    description: "Developed LinguaCV, an AI-powered resume builder integrating a Vapi conversational agent with a React front end and Flask back end, featuring REST APIs, real-time updates, and object-oriented data modeling.",
+    description: "Developed Commune, a full-stack housing management platform for apartment communities, featuring role-based dashboards, real-time ticketing and chat, document storage, and unit-level data management using modern web technologies and structured backend architecture.",
     tags: ["React", "TypeScript", "Next.js", "Supabase", "OpenAI"],
     href: "https://github.com/comp426-25f/final-project-team-17",
   },
